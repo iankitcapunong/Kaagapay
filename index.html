@@ -113,46 +113,73 @@
     </div>
   </div>
 
-  <!-- Costs -->
+  <!-- Costs: every number below is filled from LOAN_CONFIG in assets/js/main.js -->
   <section id="costs">
     <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">What it costs</span>
-        <h2>One rate. No processing, service or "membership" fees.</h2>
-        <p>You pay interest on what you borrow, for the days you borrow it. Here is a real example worked out to the centavo.</p>
+      <div class="costs-head">
+        <div>
+          <span class="eyebrow">What it costs</span>
+          <h2>One rate. No processing, service or "membership" fees.</h2>
+        </div>
+        <p>You pay interest on what you borrow, for the days you borrow it. Here is a first loan worked out to the centavo.</p>
       </div>
 
-      <div class="cost-grid">
-        <div class="example" id="example">
-          <div class="example-head">
-            <h3>Representative example</h3>
-            <span>First loan, standard rate</span>
+      <div class="costs" id="example">
+        <!-- The money -->
+        <div class="costs-main">
+          <p class="costs-label">Borrow <strong data-ex="amount">₱5,000.00</strong> for <strong data-ex="term">3 months (90 days)</strong> and you repay</p>
+          <p class="costs-total num" data-ex="total">₱5,900.00</p>
+
+          <div class="split" aria-hidden="true">
+            <span class="split-principal" data-ex-bar="principal"></span>
+            <span class="split-interest" data-ex-bar="interest"></span>
           </div>
-          <table>
-            <tbody>
-              <tr><th scope="row">Amount borrowed</th><td data-ex="amount">₱5,000.00</td></tr>
-              <tr><th scope="row">Term</th><td data-ex="term">3 months (90 days)</td></tr>
-              <tr><th scope="row">Daily interest rate</th><td data-ex="daily">0.2%</td></tr>
-              <tr><th scope="row">Total interest</th><td data-ex="interest">₱900.00</td></tr>
-              <tr><th scope="row">Fees</th><td data-ex="fee">₱0.00</td></tr>
-              <tr class="strong"><th scope="row">Total repayment</th><td data-ex="total">₱5,900.00</td></tr>
-              <tr><th scope="row">Monthly payment</th><td data-ex="installment">₱1,966.67 × 3</td></tr>
-              <tr><th scope="row">Annual interest rate (nominal)</th><td data-ex="annual">73%</td></tr>
-            </tbody>
-          </table>
-          <div class="example-foot">Pay early and you only pay interest up to the day you settle. There is no pre-termination charge.</div>
+          <dl class="split-legend">
+            <div><dt><i class="dot dot-principal"></i>Your loan</dt><dd class="num" data-ex="principal">₱5,000.00</dd></div>
+            <div><dt><i class="dot dot-interest"></i>Interest</dt><dd class="num" data-ex="interest">₱900.00</dd></div>
+            <div><dt><i class="dot dot-fee"></i>Fees</dt><dd class="num" data-ex="fee">₱0.00</dd></div>
+          </dl>
+
+          <p class="formula num">
+            <span data-ex="amount-short">₱5,000</span> × <span data-ex="daily">0.2%</span> × <span data-ex="days">90</span> days
+            = <strong data-ex="interest">₱900.00</strong>
+          </p>
+
+          <div class="schedule">
+            <h3>Your payments</h3>
+            <ol data-ex="schedule">
+              <li><span>Payment 1</span><span class="when">—</span><span class="num">₱1,966.67</span></li>
+              <li><span>Payment 2</span><span class="when">—</span><span class="num">₱1,966.67</span></li>
+              <li><span>Payment 3</span><span class="when">—</span><span class="num">₱1,966.67</span></li>
+            </ol>
+            <p>Pay early and interest stops that day. No pre-termination charge. Nominal annual rate: <span data-ex="annual">73%</span>.</p>
+          </div>
         </div>
 
-        <aside class="never">
-          <h3>Things we will never do</h3>
-          <ul>
-            <li>Ask for a fee before your loan is released</li>
-            <li>Ask you to send money to a personal GCash or bank account</li>
-            <li>Access your phone contacts or photo gallery</li>
-            <li>Contact your family, friends or employer about your loan</li>
+        <!-- The fees we don't charge -->
+        <aside class="costs-fees">
+          <h3>Fees other lenders charge</h3>
+          <ul class="struck">
+            <li><s>Processing fee</s><span class="num">₱0</span></li>
+            <li><s>Service fee</s><span class="num">₱0</span></li>
+            <li><s>Membership fee</s><span class="num">₱0</span></li>
+            <li><s>Approval fee</s><span class="num">₱0</span></li>
+            <li><s>Pre-termination charge</s><span class="num">₱0</span></li>
           </ul>
-          <p>Got a message like that using our name? Report it to us and to the <a href="https://www.sec.gov.ph" target="_blank" rel="noopener">SEC</a>.</p>
+          <p>Only a late payment charge can apply, and only if you pay after your due date. Its amount is written in your Disclosure Statement before you sign.</p>
         </aside>
+      </div>
+
+      <!-- Promises -->
+      <div class="never-strip">
+        <p class="never-title">We will never</p>
+        <ul>
+          <li>ask for a fee before your loan is released</li>
+          <li>ask you to pay into a personal GCash or bank account</li>
+          <li>access your phone contacts or photo gallery</li>
+          <li>contact your family, friends or employer about your loan</li>
+        </ul>
+        <p class="never-note">Got a message like that using our name? <a href="contact.html#report">Report it</a> to us and to the <a href="https://www.sec.gov.ph" target="_blank" rel="noopener">SEC</a>.</p>
       </div>
     </div>
   </section>

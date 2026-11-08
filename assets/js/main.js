@@ -80,7 +80,7 @@ function replay(el, cls) {
 /* ---------- Scroll reveal ---------- */
 (function reveal() {
   const sel = [
-    ".section-head", ".steps li", ".product", ".audience", ".repay-card", ".example", ".never",
+    ".section-head", ".steps li", ".product", ".audience", ".repay-card", ".costs-main", ".costs-fees", ".never-strip", ".costs-head",
     ".req-col", ".faq-list details", ".faq-layout > div:first-child", ".callout", ".channel",
     ".panel", ".partner-box", ".numbered li", ".cta-band .wrap > *", ".payout .wrap", ".audience-note",
     ".prose > *", ".form-card", ".next-steps", ".loan-type", ".doc-list li", ".facts-card",
@@ -154,15 +154,33 @@ function replay(el, cls) {
   const root = document.getElementById("example");
   if (!root) return;
   const q = quote(LOAN_CONFIG.example.amount, LOAN_CONFIG.example.term);
-  const set = (k, v) => { const el = root.querySelector(`[data-ex="${k}"]`); if (el) el.textContent = v; };
+  const set = (k, v) => root.querySelectorAll(`[data-ex="${k}"]`).forEach(el => (el.textContent = v));
   set("amount", peso(q.amount));
+  set("amount-short", peso(q.amount, 0));
+  set("principal", peso(q.amount));
   set("term", `${q.months} months (${q.days} days)`);
+  set("days", q.days);
   set("daily", pct(LOAN_CONFIG.dailyRate, 2));
   set("interest", peso(q.interest));
   set("fee", peso(q.fee));
   set("total", peso(q.total));
-  set("installment", `${peso(q.installment)} × ${q.months}`);
   set("annual", pct(q.annualRate));
+
+  // Proportion bar: how much of the total is your loan vs interest
+  const bar = k => root.querySelector(`[data-ex-bar="${k}"]`);
+  if (bar("principal")) bar("principal").style.flexGrow = q.amount;
+  if (bar("interest")) bar("interest").style.flexGrow = q.interest + q.fee;
+
+  // Payment schedule with real due dates, counted from today
+  const list = root.querySelector('[data-ex="schedule"]');
+  if (list) {
+    const fmt = d => d.toLocaleDateString("en-PH", { month: "short", day: "numeric", year: "numeric" });
+    list.innerHTML = Array.from({ length: q.months }, (_, i) => {
+      const d = new Date();
+      d.setDate(d.getDate() + LOAN_CONFIG.daysPerMonth * (i + 1));
+      return `<li><span>Payment ${i + 1}</span><span class="when">${fmt(d)}</span><span class="num">${peso(q.installment)}</span></li>`;
+    }).join("");
+  }
 })();
 
 /* ---------- Hero calculator ---------- */
