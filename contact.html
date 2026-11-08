@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact us — Kaagapay</title>
+  <meta name="description" content="Message us on Messenger, call our hotline, or request a call back. Monday to Saturday, 8 AM to 6 PM.">
+  <link rel="icon" type="image/png" href="assets/img/logos/logo-64.png">
+  <link rel="apple-touch-icon" href="assets/img/logos/logo-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Kaagapay home">
+      <img class="brand-mark" src="assets/img/logos/logo-64.png" alt="" width="32" height="32">
+      <span class="brand-name">Kaagapay</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#how">How it works</a>
+      <a href="index.html#costs">Costs</a>
+      <a href="index.html#loan-types">Loan types</a>
+      <a href="repay.html">Repay</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="signin" href="#">Sign in</a>
+      <a class="btn btn-primary" href="apply.html">Apply</a>
+    </div>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="index.html">Home</a> / Contact</div>
+      <h1>Talk to a real person</h1>
+      <p>Messenger is fastest. If you'd rather talk, leave your number and we'll call you back during office hours.</p>
+    </div>
+  </div>
+
+  <section style="padding-top:56px">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="channels">
+          <div class="channel">
+            <h3>Messenger</h3>
+            <p>Usually answered within 15 minutes during office hours.</p>
+            <a class="btn btn-primary" href="https://m.me/yourpage" target="_blank" rel="noopener">Open chat</a>
+          </div>
+          <div class="channel">
+            <h3>Hotline</h3>
+            <p class="value">[Hotline number]</p>
+            <a class="btn btn-ghost" href="tel:+630000000000">Call</a>
+          </div>
+          <div class="channel">
+            <h3>Email</h3>
+            <p class="value">[support email]</p>
+            <a class="btn btn-ghost" href="mailto:support@example.ph">Email</a>
+          </div>
+          <div class="channel">
+            <h3>Office</h3>
+            <p>[Office address]<br>Mon–Sat, 8:00 AM – 6:00 PM. Closed on regular holidays.</p>
+          </div>
+        </div>
+
+        <div class="callout" id="report" style="margin-top:28px;scroll-margin-top:96px">
+          <p><strong>Report a scam or abusive collector</strong>
+          If someone using our name asks for a fee before release, asks you to pay to a personal account, or threatens or shames you, message us with a screenshot. You can also file a complaint with the <a href="https://www.sec.gov.ph" target="_blank" rel="noopener">SEC</a>.</p>
+        </div>
+      </div>
+
+      <form class="form-card" id="callback-form" novalidate>
+        <h2>Request a call back</h2>
+        <p style="color:var(--ink-2);margin-bottom:24px">Leave your details and we'll call within one business day.</p>
+        <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="field">
+          <label for="cb-name">Full name</label>
+          <input id="cb-name" name="name" type="text" required autocomplete="name">
+          <span class="err">Required.</span>
+        </div>
+        <div class="field">
+          <label for="cb-mobile">Mobile number</label>
+          <div class="prefix"><span>+63</span><input id="cb-mobile" name="mobile" type="tel" inputmode="numeric" placeholder="917 123 4567" pattern="9[0-9 ]{9,11}" required autocomplete="tel-national"></div>
+          <span class="err">Enter a 10-digit mobile number starting with 9.</span>
+        </div>
+        <div class="field">
+          <label for="cb-topic">What's it about?</label>
+          <select id="cb-topic" name="topic" required>
+            <option value="">Select</option>
+            <option>A new loan</option>
+            <option>My application status</option>
+            <option>A payment or due date</option>
+            <option>Reporting a scam</option>
+            <option>Something else</option>
+          </select>
+          <span class="err">Choose a topic.</span>
+        </div>
+        <div class="field">
+          <label for="cb-time">Best time to call</label>
+          <select id="cb-time" name="best_time">
+            <option>Anytime</option>
+            <option>Morning (8 AM – 12 NN)</option>
+            <option>Afternoon (12 NN – 6 PM)</option>
+          </select>
+        </div>
+        <label class="consent"><input type="checkbox" name="consent" required> <span>I allow [Company name] Lending Corp. to use these details to contact me, as described in the <a href="privacy.html">Privacy Notice</a>.</span></label>
+        <div class="form-nav">
+          <button type="submit" class="btn btn-primary" style="margin-left:auto">Request call</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand-mark" src="assets/img/logos/logo-64.png" alt="" width="32" height="32">
+          <span class="brand-name">Kaagapay</span>
+        </a>
+        <p>Cash loans and Sangla loans for working Filipinos, with every cost shown before you sign.</p>
+      </div>
+      <div>
+        <h4>Loans</h4>
+        <ul>
+          <li><a href="apply.html">Apply</a></li>
+          <li><a href="personal-loan.html">Personal cash loan</a></li>
+          <li><a href="car-sangla-orcr.html">Car Sangla ORCR</a></li>
+          <li><a href="motorcycle-sangla-orcr.html">Motorcycle Sangla ORCR</a></li>
+          <li><a href="real-estate-sangla-titulo.html">Real Estate (Sangla Titulo)</a></li>
+          <li><a href="repay.html">How to repay</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="privacy.html">Privacy notice</a></li>
+          <li><a href="contact.html#report">Report a scam</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>[Hotline number]</li>
+          <li>[support email]</li>
+          <li><a href="https://m.me/yourpage" target="_blank" rel="noopener">Messenger</a></li>
+          <li>Mon–Sat, 8:00 AM – 6:00 PM</li>
+          <li>[Office address]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p class="reg">[Company name] Lending Corp. · SEC Registration No. [__________] · Certificate of Authority No. [____]</p>
+      <p>Kaagapay is an online lending platform operated by [Company name] Lending Corp., registered with the Securities and Exchange Commission. Before taking a loan, read the <a href="#">Terms and Conditions</a>, <a href="privacy.html">Privacy Policy</a> and the Disclosure Statement given to you under the Truth in Lending Act (R.A. 3765).</p>
+      <p>We collect and process personal data in line with the Data Privacy Act of 2012 (R.A. 10173). We do not access your contacts, photos or social media.</p>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> [Company name] Lending Corp.</span>
+      <span><a href="https://www.sec.gov.ph/lending-companies-and-financing-companies-2/list-of-recorded-online-lending-platforms" target="_blank" rel="noopener">SEC list of recorded online lending platforms</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

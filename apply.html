@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apply for a loan — Kaagapay</title>
+  <meta name="description" content="Apply for a Kaagapay cash loan in about 2 minutes. Applying is free.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="assets/img/logos/logo-64.png">
+  <link rel="apple-touch-icon" href="assets/img/logos/logo-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Kaagapay home">
+      <img class="brand-mark" src="assets/img/logos/logo-64.png" alt="" width="32" height="32">
+      <span class="brand-name">Kaagapay</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#how">How it works</a>
+      <a href="index.html#costs">Costs</a>
+      <a href="index.html#loan-types">Loan types</a>
+      <a href="repay.html">Repay</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="signin" href="#">Sign in</a>
+      <a class="btn btn-primary" href="apply.html">Apply</a>
+    </div>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+  <!--
+    Front-end only. The submit handler in assets/js/main.js stops at a TODO:
+    send the form to your backend / CRM, then text the applicant a secure link
+    for ID + selfie verification.
+  -->
+  <div class="wrap apply-layout">
+    <div>
+      <div class="apply-head">
+        <h1>Let's find the right loan for you</h1>
+        <p>Tell us a little about yourself. It takes about 2 minutes. Our team will review it and text you exactly what to prepare next.</p>
+      </div>
+
+      <form id="apply-form" novalidate>
+        <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" name="full_name" type="text" required autocomplete="name">
+            <span class="help">As it appears on your valid ID.</span>
+            <span class="err">Enter your full name.</span>
+          </div>
+          <div class="field">
+            <label for="mobile">Mobile number</label>
+            <input id="mobile" name="mobile" type="tel" inputmode="numeric" placeholder="09XXXXXXXXX" pattern="09[0-9]{9}" maxlength="11" required autocomplete="tel-national">
+            <span class="err">Enter an 11-digit number starting with 09.</span>
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="province">Province</label>
+            <input id="province" name="province" type="text" required autocomplete="address-level1">
+            <span class="err">Enter your province.</span>
+          </div>
+          <div class="field">
+            <label for="city">City or municipality</label>
+            <input id="city" name="city" type="text" required autocomplete="address-level2">
+            <span class="err">Enter your city or municipality.</span>
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="product">What kind of loan?</label>
+            <select id="product" name="product" required>
+              <option value="">Choose one</option>
+              <optgroup label="Personal cash loan">
+                <option value="first">First loan (up to ₱10,000)</option>
+                <option value="returning">Returning borrower (up to ₱25,000)</option>
+              </optgroup>
+              <optgroup label="Sangla loans">
+                <option value="car-orcr">Car Sangla ORCR</option>
+                <option value="moto-orcr">Motorcycle Sangla ORCR</option>
+                <option value="real-estate">Real Estate (Sangla Titulo)</option>
+              </optgroup>
+            </select>
+            <span class="err">Choose a loan type.</span>
+          </div>
+          <div class="field">
+            <label for="income">Source of income</label>
+            <select id="income" name="income_type" required>
+              <option value="">Choose one</option>
+              <option value="employed">Employed</option>
+              <option value="self-employed">Business owner / self-employed</option>
+              <option value="freelance">Freelancer / online worker</option>
+              <option value="pension">Pension or remittance</option>
+            </select>
+            <span class="err">Choose your source of income.</span>
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="amount">How much do you need?</label>
+            <div class="prefix"><span>₱</span><input id="amount" name="amount" type="number" inputmode="numeric" placeholder="e.g. 5000" min="2000" max="10000" step="500" required></div>
+            <span class="help" data-help="amount" hidden>An estimate is fine. The final amount depends on appraisal.</span>
+            <span class="err" data-err="amount">Enter an amount from ₱2,000 to ₱10,000, in steps of ₱500.</span>
+          </div>
+          <div class="field" data-term-field>
+            <label for="term">Pay it back over</label>
+            <select id="term" name="term" required></select>
+            <span class="err">Choose a term.</span>
+          </div>
+        </div>
+
+        <p class="estimate" data-estimate hidden>
+          Estimated <strong data-est="installment">₱0</strong> per month, <strong data-est="total">₱0</strong> in total
+          (<span data-est="interest">₱0</span> interest, no fees).
+        </p>
+
+        <!-- Shown only for Car / Motorcycle Sangla ORCR -->
+        <fieldset class="collateral" data-collateral="vehicle" hidden disabled>
+          <legend><span data-vehicle-word>Vehicle</span> details</legend>
+          <div class="row-2">
+            <div class="field">
+              <label for="v-model">Make and model</label>
+              <input id="v-model" name="vehicle_model" type="text" placeholder="e.g. Toyota Vios" required>
+              <span class="err">Enter the make and model.</span>
+            </div>
+            <div class="field">
+              <label for="v-year">Year model</label>
+              <input id="v-year" name="vehicle_year" type="number" inputmode="numeric" placeholder="e.g. 2019" min="1990" max="2027" required>
+              <span class="err">Enter a valid year model.</span>
+            </div>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label for="v-plate">Plate number</label>
+              <input id="v-plate" name="vehicle_plate" type="text" placeholder="e.g. ABC 1234" autocapitalize="characters" required>
+              <span class="err">Enter the plate number.</span>
+            </div>
+            <div class="field">
+              <label for="v-owner">Is the OR/CR in your name?</label>
+              <select id="v-owner" name="vehicle_or_cr_owner" required>
+                <option value="">Choose one</option>
+                <option value="yes">Yes, it's in my name</option>
+                <option value="deed-of-sale">Not yet, I have a deed of sale</option>
+                <option value="no">No, it's in someone else's name</option>
+              </select>
+              <span class="err">Choose one.</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Shown only for Real Estate (Sangla Titulo) -->
+        <fieldset class="collateral" data-collateral="property" hidden disabled>
+          <legend>Property details</legend>
+          <div class="row-2">
+            <div class="field">
+              <label for="p-type">Property type</label>
+              <select id="p-type" name="property_type" required>
+                <option value="">Choose one</option>
+                <option>Lot only</option>
+                <option>House and lot</option>
+                <option>Condominium unit</option>
+                <option>Commercial property</option>
+              </select>
+              <span class="err">Choose the property type.</span>
+            </div>
+            <div class="field">
+              <label for="p-area">Lot or floor area (sqm)</label>
+              <input id="p-area" name="property_area_sqm" type="number" inputmode="numeric" placeholder="e.g. 120" min="1" required>
+              <span class="err">Enter the area in square meters.</span>
+            </div>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label for="p-loc">Property location (city / municipality)</label>
+              <input id="p-loc" name="property_location" type="text" required>
+              <span class="err">Enter where the property is.</span>
+            </div>
+            <div class="field">
+              <label for="p-owner">Is the title in your name?</label>
+              <select id="p-owner" name="property_title_owner" required>
+                <option value="">Choose one</option>
+                <option value="yes">Yes, it's in my name</option>
+                <option value="spouse">In my name and my spouse's</option>
+                <option value="family">In a parent's or relative's name</option>
+              </select>
+              <span class="err">Choose one.</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <span class="label">How should we reach you?</span>
+          <div class="radio-row">
+            <label><input type="radio" name="contact_pref" value="sms" checked> SMS</label>
+            <label><input type="radio" name="contact_pref" value="call"> Phone call</label>
+            <label><input type="radio" name="contact_pref" value="messenger"> Messenger</label>
+          </div>
+        </div>
+
+        <label class="consent consent-box"><input type="checkbox" name="consent" required>
+          <span>I allow [Company name] Lending Corp. to collect and process my personal information to assess my loan application, as described in the <a href="privacy.html" target="_blank">privacy notice</a>. I understand I can withdraw this consent at any time.</span>
+        </label>
+
+        <div class="apply-submit">
+          <button type="submit" class="btn btn-primary">Submit application</button>
+          <p>Applying is free. We never charge anything before your loan is released.</p>
+        </div>
+      </form>
+    </div>
+
+    <aside class="apply-side">
+      <div class="side-card">
+        <h2>What happens next</h2>
+        <ol class="circle-steps">
+          <li><strong>We review your application</strong><span>Usually within the same business day. We'll reach you the way you chose.</span></li>
+          <li><strong>Send your documents</strong><span>We text you a secure link to upload your ID and selfie, plus your OR/CR or title for Sangla loans. Photos from your phone are fine.</span></li>
+          <li><strong>Sign and receive</strong><span>Read and sign your Disclosure Statement. The money goes to your GCash, Maya or bank.</span></li>
+        </ol>
+      </div>
+      <p class="side-note">Prefer to chat? <a href="https://m.me/yourpage" target="_blank" rel="noopener">Apply through Messenger</a> instead.</p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand-mark" src="assets/img/logos/logo-64.png" alt="" width="32" height="32">
+          <span class="brand-name">Kaagapay</span>
+        </a>
+        <p>Cash loans and Sangla loans for working Filipinos, with every cost shown before you sign.</p>
+      </div>
+      <div>
+        <h4>Loans</h4>
+        <ul>
+          <li><a href="apply.html">Apply</a></li>
+          <li><a href="personal-loan.html">Personal cash loan</a></li>
+          <li><a href="car-sangla-orcr.html">Car Sangla ORCR</a></li>
+          <li><a href="motorcycle-sangla-orcr.html">Motorcycle Sangla ORCR</a></li>
+          <li><a href="real-estate-sangla-titulo.html">Real Estate (Sangla Titulo)</a></li>
+          <li><a href="repay.html">How to repay</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="privacy.html">Privacy notice</a></li>
+          <li><a href="contact.html#report">Report a scam</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>[Hotline number]</li>
+          <li>[support email]</li>
+          <li><a href="https://m.me/yourpage" target="_blank" rel="noopener">Messenger</a></li>
+          <li>Mon–Sat, 8:00 AM – 6:00 PM</li>
+          <li>[Office address]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p class="reg">[Company name] Lending Corp. · SEC Registration No. [__________] · Certificate of Authority No. [____]</p>
+      <p>Kaagapay is an online lending platform operated by [Company name] Lending Corp., registered with the Securities and Exchange Commission. Before taking a loan, read the <a href="#">Terms and Conditions</a>, <a href="privacy.html">Privacy Policy</a> and the Disclosure Statement given to you under the Truth in Lending Act (R.A. 3765).</p>
+      <p>We collect and process personal data in line with the Data Privacy Act of 2012 (R.A. 10173). We do not access your contacts, photos or social media.</p>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> [Company name] Lending Corp.</span>
+      <span><a href="https://www.sec.gov.ph/lending-companies-and-financing-companies-2/list-of-recorded-online-lending-platforms" target="_blank" rel="noopener">SEC list of recorded online lending platforms</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

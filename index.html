@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kaagapay — Cash loans from ₱2,000, costs shown upfront</title>
+  <meta name="description" content="Borrow ₱2,000 to ₱25,000 online and receive it in GCash, Maya or your bank. See the full interest, total and due dates before you apply. No upfront fees.">
+  <link rel="icon" type="image/png" href="assets/img/logos/logo-64.png">
+  <link rel="apple-touch-icon" href="assets/img/logos/logo-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Kaagapay home">
+      <img class="brand-mark" src="assets/img/logos/logo-64.png" alt="" width="32" height="32">
+      <span class="brand-name">Kaagapay</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#costs">Costs</a>
+      <a href="#loan-types">Loan types</a>
+      <a href="repay.html">Repay</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="signin" href="#">Sign in</a>
+      <a class="btn btn-primary" href="apply.html">Apply</a>
+    </div>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Hero: headline + calculator over the hero photo (assets/img/hero-photo.jpg) -->
+  <section class="hero hero--image">
+    <div class="wrap hero-grid">
+      <div class="hero-intro">
+        <h1 class="hero-title">Borrow what you need. <em>See every peso</em> first.</h1>
+        <p class="hero-lede">Cash loans from ₱2,000, sent to GCash, Maya or your bank. The interest, the total and every due date are on screen before you apply.</p>
+        <ul class="hero-facts">
+          <li><span>Interest</span><span><span data-cfg="daily">0.2%</span> per day, nothing else</span></li>
+          <li><span>First loan</span><span><span data-cfg="min">₱2,000</span> – <span data-cfg="maxFirst">₱10,000</span></span></li>
+          <li><span>Returning borrowers</span><span>up to <span data-cfg="maxReturning">₱25,000</span></span></li>
+          <li><span>You'll need</span><span>1 valid ID and a selfie</span></li>
+        </ul>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="apply.html">Apply now</a>
+          <!-- Replace "yourpage" with your Facebook Page username -->
+          <a class="btn btn-ghost btn-messenger" href="https://m.me/yourpage" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17.16.14.26.35.27.57l.05 1.78a.8.8 0 0 0 1.12.71l1.98-.87a.8.8 0 0 1 .53-.04c.91.25 1.88.38 2.91.38 5.64 0 10-4.13 10-9.7S17.64 2 12 2Zm6 7.46-2.94 4.66a1.5 1.5 0 0 1-2.17.4l-2.34-1.75a.6.6 0 0 0-.72 0l-3.16 2.4c-.42.32-.97-.18-.69-.63l2.94-4.66a1.5 1.5 0 0 1 2.17-.4l2.34 1.75a.6.6 0 0 0 .72 0l3.16-2.4c.42-.32.97.18.69.63Z"/></svg>
+            Chat on Messenger
+          </a>
+        </div>
+        <p class="hero-note"><strong>We never charge before release.</strong> If someone asks you to pay a fee to get approved, they are not us.</p>
+      </div>
+
+      <div class="calc" id="calc" aria-label="Loan calculator">
+        <div class="calc-tabs" role="tablist">
+          <button class="calc-tab" role="tab" aria-selected="true" data-product="first">First loan<small>up to ₱10,000</small></button>
+          <button class="calc-tab" role="tab" aria-selected="false" data-product="returning">Returning<small>up to ₱25,000</small></button>
+        </div>
+        <div class="calc-body">
+          <div class="calc-field">
+            <label class="calc-label" for="calc-amount"><span>How much do you need?</span></label>
+            <div class="calc-amount" data-out="amount">₱5,000</div>
+            <input class="range" id="calc-amount" type="range" min="2000" max="10000" step="500" value="5000">
+            <div class="range-ends"><span data-out="min">₱2,000</span><span data-out="max">₱10,000</span></div>
+          </div>
+
+          <div class="calc-field">
+            <div class="calc-label"><span>Pay it back over</span></div>
+            <div class="terms" role="group" aria-label="Loan term in months"></div>
+          </div>
+
+          <div class="receipt" aria-live="polite">
+            <dl>
+              <div class="receipt-row"><dt>You receive</dt><span class="leader"></span><dd data-out="receive">₱5,000.00</dd></div>
+              <div class="receipt-row"><dt>Interest</dt><span class="leader"></span><dd data-out="interest">₱900.00</dd></div>
+              <div class="receipt-row"><dt>Fees</dt><span class="leader"></span><dd data-out="fee">₱0.00</dd></div>
+              <div class="receipt-row total"><dt>Total to repay</dt><span class="leader"></span><dd data-out="total">₱5,900.00</dd></div>
+              <div class="receipt-row highlight"><dt>Monthly payment</dt><span class="leader"></span><dd data-out="installment">₱1,966.67 × 3</dd></div>
+              <div class="receipt-row"><dt>First due date</dt><span class="leader"></span><dd data-out="due">—</dd></div>
+            </dl>
+          </div>
+
+          <a class="btn btn-primary btn-block" href="apply.html" data-out="cta">Apply for ₱5,000</a>
+          <p class="calc-fineprint">Rate: <span data-out="rate">0.2% per day</span>, charged on the amount you borrowed (amount × daily rate × days). This is an estimate. Your final amount, term and schedule appear in the Disclosure Statement, which you review before signing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Payout channels -->
+  <div class="payout">
+    <div class="wrap">
+      <span class="payout-label">Where the money goes:</span>
+      <ul class="payout-list">
+        <li class="has-logo"><img src="assets/img/logos/gcash.png" alt="GCash"></li>
+        <li class="has-logo"><img src="assets/img/logos/maya.png" alt="Maya"></li>
+        <li class="has-logo"><img src="assets/img/logos/bdo.png" alt="BDO"></li>
+        <li class="has-logo"><img src="assets/img/logos/bpi.png" alt="BPI"></li>
+        <li class="has-logo"><img src="assets/img/logos/unionbank.png" alt="UnionBank"></li>
+        <li class="has-logo"><img src="assets/img/logos/metrobank.png" alt="Metrobank"></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Costs -->
+  <section id="costs">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">What it costs</span>
+        <h2>One rate. No processing, service or "membership" fees.</h2>
+        <p>You pay interest on what you borrow, for the days you borrow it. Here is a real example worked out to the centavo.</p>
+      </div>
+
+      <div class="cost-grid">
+        <div class="example" id="example">
+          <div class="example-head">
+            <h3>Representative example</h3>
+            <span>First loan, standard rate</span>
+          </div>
+          <table>
+            <tbody>
+              <tr><th scope="row">Amount borrowed</th><td data-ex="amount">₱5,000.00</td></tr>
+              <tr><th scope="row">Term</th><td data-ex="term">3 months (90 days)</td></tr>
+              <tr><th scope="row">Daily interest rate</th><td data-ex="daily">0.2%</td></tr>
+              <tr><th scope="row">Total interest</th><td data-ex="interest">₱900.00</td></tr>
+              <tr><th scope="row">Fees</th><td data-ex="fee">₱0.00</td></tr>
+              <tr class="strong"><th scope="row">Total repayment</th><td data-ex="total">₱5,900.00</td></tr>
+              <tr><th scope="row">Monthly payment</th><td data-ex="installment">₱1,966.67 × 3</td></tr>
+              <tr><th scope="row">Annual interest rate (nominal)</th><td data-ex="annual">73%</td></tr>
+            </tbody>
+          </table>
+          <div class="example-foot">Pay early and you only pay interest up to the day you settle. There is no pre-termination charge.</div>
+        </div>
+
+        <aside class="never">
+          <h3>Things we will never do</h3>
+          <ul>
+            <li>Ask for a fee before your loan is released</li>
+            <li>Ask you to send money to a personal GCash or bank account</li>
+            <li>Access your phone contacts or photo gallery</li>
+            <li>Contact your family, friends or employer about your loan</li>
+          </ul>
+          <p>Got a message like that using our name? Report it to us and to the <a href="https://www.sec.gov.ph" target="_blank" rel="noopener">SEC</a>.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>From application to cash, in four steps.</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Pick an amount</h3>
+          <p>Choose how much and for how long. The calculator shows what you'll owe.</p>
+          <span class="step-time">1 min</span>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Fill in the form</h3>
+          <p>Your details, your work or income, and where to send the money.</p>
+          <span class="step-time">5–7 min</span>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Verify your ID</h3>
+          <p>Upload a photo of one valid ID and take a selfie so we know it's you.</p>
+          <span class="step-time">2 min</span>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Sign and receive</h3>
+          <p>Read and sign the Disclosure Statement. We send the money once it's signed.</p>
+          <span class="step-time">same day, usually</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Loan types -->
+  <section id="loan-types">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Loan types</span>
+        <h2>What we can help you borrow for</h2>
+        <p>Each loan type has its own requirements. Open one to see exactly what to prepare.</p>
+      </div>
+      <div class="loan-types">
+        <a class="loan-type" href="personal-loan.html">
+          <div class="loan-type-art">
+            <span class="loan-type-badge">No collateral</span>
+            <img src="assets/img/loans/personal.jpg" alt="Woman smiling at a fan of peso bills while holding her phone" loading="lazy" width="900" height="1117">
+          </div>
+          <div class="loan-type-body">
+            <h3>Personal cash loan</h3>
+            <p>₱2,000 to ₱25,000 for everyday needs, sent to GCash, Maya or your bank.</p>
+            <span class="loan-type-docs">2 documents to prepare</span>
+            <span class="loan-type-link">See requirements</span>
+          </div>
+        </a>
+        <a class="loan-type" href="car-sangla-orcr.html">
+          <div class="loan-type-art">
+            <span class="loan-type-badge">Keep your car</span>
+            <img src="assets/img/loans/car.jpg" alt="Woman holding cash, car keys and OR/CR beside her car" loading="lazy" width="900" height="1205">
+          </div>
+          <div class="loan-type-body">
+            <h3>Car Sangla ORCR</h3>
+            <p>Borrow against your car's OR/CR and keep driving it while you pay.</p>
+            <span class="loan-type-docs">5 documents to prepare</span>
+            <span class="loan-type-link">See requirements</span>
+          </div>
+        </a>
+        <a class="loan-type" href="motorcycle-sangla-orcr.html">
+          <div class="loan-type-art">
+            <span class="loan-type-badge">Keep your motor</span>
+            <img src="assets/img/loans/motorcycle.jpg" alt="Woman holding cash and OR/CR beside her motorcycle" loading="lazy" width="900" height="1205">
+          </div>
+          <div class="loan-type-body">
+            <h3>Motorcycle Sangla ORCR</h3>
+            <p>Use your motorcycle's OR/CR for quick cash. Your motor stays with you.</p>
+            <span class="loan-type-docs">5 documents to prepare</span>
+            <span class="loan-type-link">See requirements</span>
+          </div>
+        </a>
+        <a class="loan-type" href="real-estate-sangla-titulo.html">
+          <div class="loan-type-art">
+            <span class="loan-type-badge">Largest amounts</span>
+            <img src="assets/img/loans/real-estate.jpg" alt="Woman holding cash and a land title in front of a house" loading="lazy" width="900" height="1205">
+          </div>
+          <div class="loan-type-body">
+            <h3>Real Estate (Sangla Titulo)</h3>
+            <p>Unlock the value of titled property for bigger plans. Longer terms, larger amounts.</p>
+            <span class="loan-type-docs">6 documents to prepare</span>
+            <span class="loan-type-link">See requirements</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who we lend to -->
+  <section id="who" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Who we lend to</span>
+        <h2>Whatever your work, you can apply.</h2>
+        <p>Everyone needs just one valid ID and a selfie. The documents below are optional, but they help us approve a higher amount, faster.</p>
+      </div>
+      <div class="audience-grid">
+        <article class="audience">
+          <h3>Employees</h3>
+          <p>Private or government, regular or contractual.</p>
+          <span class="audience-count">Optional: 3 documents</span>
+          <ul class="mini-check">
+            <li>Company ID or Certificate of Employment</li>
+            <li>Latest payslip</li>
+            <li>Payroll account or ATM details</li>
+          </ul>
+          <a class="audience-link" href="apply.html?income=employed">Apply as an employee</a>
+        </article>
+        <article class="audience">
+          <h3>Business owners</h3>
+          <p>Sari-sari stores, food stalls, online sellers, small shops.</p>
+          <span class="audience-count">Optional: 3 documents</span>
+          <ul class="mini-check">
+            <li>DTI registration or Mayor's permit</li>
+            <li>Photo of your store or stall</li>
+            <li>3 months of GCash, Maya or bank history</li>
+          </ul>
+          <a class="audience-link" href="apply.html?income=self-employed">Apply as a business owner</a>
+        </article>
+        <article class="audience">
+          <h3>Freelancers</h3>
+          <p>VAs, online workers, riders and gig workers.</p>
+          <span class="audience-count">Optional: 3 documents</span>
+          <ul class="mini-check">
+            <li>Contract or client invoices</li>
+            <li>Platform earnings screenshot</li>
+            <li>3 months of e-wallet or bank history</li>
+          </ul>
+          <a class="audience-link" href="apply.html?income=freelance">Apply as a freelancer</a>
+        </article>
+        <article class="audience">
+          <h3>Pensioners and OFW families</h3>
+          <p>Regular pension or remittance from abroad.</p>
+          <span class="audience-count">Optional: 2 documents</span>
+          <ul class="mini-check">
+            <li>SSS or GSIS pension slip</li>
+            <li>Recent remittance receipts</li>
+          </ul>
+          <a class="audience-link" href="apply.html?income=pension">Apply with pension or remittance</a>
+        </article>
+      </div>
+      <p class="audience-note">Clear phone photos are fine. If we need anything else, we'll tell you exactly what before you're asked to resend.</p>
+    </div>
+  </section>
+
+  <!-- Requirements -->
+  <section id="requirements">
+    <div class="wrap req-grid">
+      <div class="req-col">
+        <span class="eyebrow">Who can apply</span>
+        <h2>You can apply if you are:</h2>
+        <ul class="checklist" style="margin-top:28px">
+          <li><strong>A Filipino citizen living in the Philippines</strong><span>Applications from abroad aren't accepted yet.</span></li>
+          <li><strong>21 to 65 years old</strong><span>Your age is checked against your ID.</span></li>
+          <li><strong>Earning a regular income</strong><span>Employed, self-employed, or receiving a pension or remittance.</span></li>
+          <li><strong>Using a mobile number in your own name</strong><span>We send your code and loan updates by SMS.</span></li>
+        </ul>
+      </div>
+      <div class="req-col">
+        <span class="eyebrow">What to prepare</span>
+        <h3 style="font-size:1.6rem;margin-bottom:12px">One valid ID and a selfie.</h3>
+        <p>No payslip, no co-maker, no collateral. Any one of these IDs works:</p>
+        <ul class="id-list">
+          <li>PhilSys National ID</li>
+          <li>UMID</li>
+          <li>Driver's License</li>
+          <li class="is-passport">Passport</li>
+          <li>SSS ID</li>
+          <li>PRC ID</li>
+          <li>Postal ID</li>
+          <li>Voter's ID</li>
+        </ul>
+        <p style="margin-top:24px">Your e-wallet or bank account must be in the <strong>same name</strong> as your ID. We can't send money to someone else's account.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Repayment -->
+  <section id="repay" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Paying it back</span>
+        <h2>Pay from your phone, or at a payment center near you.</h2>
+        <p>Every payment needs your loan reference number, which you'll find in your account and in our SMS reminders.</p>
+      </div>
+      <div class="repay-grid">
+        <div class="repay-card">
+          <h3>E-wallets</h3>
+          <p>Pay inside the app in a few taps.</p>
+          <ul class="logos">
+            <li><img src="assets/img/logos/gcash.png" alt="GCash" loading="lazy"></li>
+            <li><img src="assets/img/logos/maya.png" alt="Maya" loading="lazy"></li>
+            <li class="is-text">ShopeePay</li>
+          </ul>
+        </div>
+        <div class="repay-card">
+          <h3>Online banking</h3>
+          <p>InstaPay or bills payment from your bank app.</p>
+          <ul class="logos">
+            <li><img src="assets/img/logos/bdo.png" alt="BDO" loading="lazy"></li>
+            <li><img src="assets/img/logos/bpi.png" alt="BPI" loading="lazy"></li>
+            <li><img src="assets/img/logos/unionbank.png" alt="UnionBank" loading="lazy"></li>
+            <li><img src="assets/img/logos/metrobank.png" alt="Metrobank" loading="lazy"></li>
+            <li class="is-text wide">+ any InstaPay bank</li>
+          </ul>
+        </div>
+        <div class="repay-card">
+          <h3>Over the counter</h3>
+          <p>Pay in cash at a partner outlet.</p>
+          <ul class="logos">
+            <li><img src="assets/img/logos/7eleven.png" alt="7-Eleven" loading="lazy"></li>
+            <li><img src="assets/img/logos/cebuana.png" alt="Cebuana Lhuillier" loading="lazy"></li>
+            <li><img src="assets/img/logos/mlhuillier.png" alt="M Lhuillier" loading="lazy"></li>
+            <li><img src="assets/img/logos/bayad.svg" alt="Bayad Center" loading="lazy"></li>
+            <!-- Official lockup is Palawan Pawnshop over Palawan Express; the tile shows the Palawan Express half -->
+            <li><img class="crop-palawan" src="assets/img/logos/palawan.webp" alt="Palawan Express Pera Padala" loading="lazy"></li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout">
+        <p><strong>Can't make a payment on time?</strong> Message us before your due date. We can usually move it or split it, and doing it early keeps your record clean. <a href="repay.html">See the full repayment guide</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    Reviews: add this section only once you have real, consenting borrowers.
+    Format that reads as credible: first name + initial, loan used, province.
+    <section id="reviews">
+      <div class="wrap">
+        <div class="section-head"><span class="eyebrow">From borrowers</span><h2>What borrowers tell us after.</h2></div>
+        <div class="audience-grid">
+          <blockquote class="audience"><p>"..."</p><footer>Name I. · First loan · Province</footer></blockquote>
+        </div>
+      </div>
+    </section>
+  -->
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap faq-layout">
+      <div>
+        <span class="eyebrow">Questions</span>
+        <h2>Things people ask before applying.</h2>
+        <p style="margin-top:16px;color:var(--ink-2)">Can't find it here? <a href="faq.html">Read all FAQs</a> or message our team.</p>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>How fast will I get the money?</summary>
+          <div class="answer"><p>Most complete applications get a decision the same business day. Once you sign the Disclosure Statement, the money is sent right away. E-wallet transfers usually arrive within minutes, and InstaPay bank transfers within the hour.</p></div>
+        </details>
+        <details>
+          <summary>Will this affect my credit record?</summary>
+          <div class="answer"><p>We report to the Credit Information Corporation (CIC), as lenders in the Philippines are required to. Paying on time builds your record. Late payments can hurt it.</p></div>
+        </details>
+        <details>
+          <summary>What happens if I pay late?</summary>
+          <div class="answer"><p>A late payment charge applies from the day after your due date. The exact amount is in your Disclosure Statement before you sign. If you tell us before the due date, we'll work out a new schedule with you.</p></div>
+        </details>
+        <details>
+          <summary>Can I pay off my loan early?</summary>
+          <div class="answer"><p>Yes, at any time. You only pay interest up to the day you settle, and there's no pre-termination charge.</p></div>
+        </details>
+        <details>
+          <summary>Why was my application declined?</summary>
+          <div class="answer"><p>Usually because of a blurry ID photo, a name mismatch between your ID and payout account, or income we couldn't verify. You can reapply after 30 days.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand-mark" src="assets/img/logos/logo-64.png" alt="" width="32" height="32">
+          <span class="brand-name">Kaagapay</span>
+        </a>
+        <p>Cash loans and Sangla loans for working Filipinos, with every cost shown before you sign.</p>
+      </div>
+      <div>
+        <h4>Loans</h4>
+        <ul>
+          <li><a href="apply.html">Apply</a></li>
+          <li><a href="personal-loan.html">Personal cash loan</a></li>
+          <li><a href="car-sangla-orcr.html">Car Sangla ORCR</a></li>
+          <li><a href="motorcycle-sangla-orcr.html">Motorcycle Sangla ORCR</a></li>
+          <li><a href="real-estate-sangla-titulo.html">Real Estate (Sangla Titulo)</a></li>
+          <li><a href="repay.html">How to repay</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="privacy.html">Privacy notice</a></li>
+          <li><a href="contact.html#report">Report a scam</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>[Hotline number]</li>
+          <li>[support email]</li>
+          <li><a href="https://m.me/yourpage" target="_blank" rel="noopener">Messenger</a></li>
+          <li>Mon–Sat, 8:00 AM – 6:00 PM</li>
+          <li>[Office address]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p class="reg">[Company name] Lending Corp. · SEC Registration No. [__________] · Certificate of Authority No. [____]</p>
+      <p>Kaagapay is an online lending platform operated by [Company name] Lending Corp., registered with the Securities and Exchange Commission. Before taking a loan, read the <a href="#">Terms and Conditions</a>, <a href="privacy.html">Privacy Policy</a> and the Disclosure Statement given to you under the Truth in Lending Act (R.A. 3765).</p>
+      <p>We collect and process personal data in line with the Data Privacy Act of 2012 (R.A. 10173). We do not access your contacts, photos or social media.</p>
+      <p>All bank, e-wallet and payment-center names and logos are trademarks of their respective owners and are shown only to identify where you can receive or pay your loan.</p>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> [Company name] Lending Corp.</span>
+      <span><a href="https://www.sec.gov.ph/lending-companies-and-financing-companies-2/list-of-recorded-online-lending-platforms" target="_blank" rel="noopener">SEC list of recorded online lending platforms</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
