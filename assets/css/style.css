@@ -369,9 +369,9 @@ section[id], [id="calc"] { scroll-margin-top: 68px; }
 
 /* ---------- Payout strip ---------- */
 .payout { padding: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
-.payout .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; padding-top: 22px; padding-bottom: 22px; }
+.payout .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 32px; padding-top: 22px; padding-bottom: 22px; }
 .payout-label { font-size: .9rem; color: var(--ink-2); }
-.payout-list { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: 0; padding: 0; }
+.payout-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; list-style: none; margin: 0; padding: 0; }
 .payout-list li {
   padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px;
   font-weight: 600; font-size: .92rem; background: var(--paper);
