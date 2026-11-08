@@ -205,7 +205,7 @@ section[id], [id="calc"] { scroll-margin-top: 68px; }
 .hero--image .hero-intro .hero-facts li { border-color: rgba(16, 34, 26, .18); }
 .hero--image .hero-intro .btn-ghost { background: rgba(255, 255, 255, .7); }
 @media (min-width: 961px) {
-  .hero--image .hero-grid { grid-template-columns: minmax(0, 470px) 430px; justify-content: space-between; }
+  .hero--image .hero-grid { grid-template-columns: minmax(0, 500px) 360px; align-items: center; justify-content: space-between; }
 }
 /* Frosted calculator so the photo stays visible behind it */
 .hero--image .calc {
@@ -1118,4 +1118,39 @@ a { transition: color .2s var(--ease); }
   .receipt { padding: 14px 14px; }
   .receipt-row { font-size: .88rem; gap: 6px; }
   .receipt-row.highlight dd { padding: 2px 4px; }
+}
+
+/* ---------- Compact calculator (₱100K – ₱2M, no tabs) ---------- */
+.calc--compact .calc-body { padding: 22px 22px 18px; }
+.calc-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.calc--compact .calc-label { margin: 0; font-size: .86rem; }
+.calc-rate {
+  font: 600 .74rem/1 var(--mono); color: var(--green-deep);
+  background: var(--accent-soft); padding: 5px 8px; border-radius: 999px; white-space: nowrap;
+}
+.calc--compact .calc-amount { font-size: 1.9rem; margin-top: 6px; }
+.calc--compact .range { margin: 8px 0 2px; }
+.calc--compact .calc-label--terms { margin-top: 16px; margin-bottom: 8px; }
+.calc--compact .terms { gap: 6px; margin: 0; }
+.calc--compact .term { min-width: 0; flex: 1 1 0; padding: 8px 0; font-size: .86rem; }
+.calc--compact .term small { display: none; }
+
+.calc-result {
+  margin: 16px 0 14px; padding: 14px 16px; border-radius: var(--radius);
+  background: rgba(255, 255, 255, .7); border: 1px dashed var(--line-2);
+}
+.calc-monthly { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 12px; }
+.calc-monthly span { font-size: .86rem; color: var(--ink-2); }
+.calc-monthly strong { font-size: 1.45rem; color: var(--green-deep); letter-spacing: -0.02em; grid-row: 1 / span 2; grid-column: 2; align-self: center; }
+.calc-monthly small { font-size: .78rem; color: var(--ink-3); grid-column: 1; }
+.calc-sums { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0 0; padding-top: 12px; border-top: 1px solid var(--line); }
+.calc-sums div { display: flex; flex-direction: column; gap: 2px; }
+.calc-sums dt { font-size: .78rem; color: var(--ink-3); }
+.calc-sums dd { margin: 0; font-size: .95rem; font-weight: 600; color: var(--ink); }
+.calc-monthly strong.pop, .calc-sums dd.pop { animation: pop .45s var(--ease); }
+.calc--compact .btn-block { min-height: 44px; }
+.calc--compact .calc-fineprint { font-size: .74rem; margin-top: 10px; }
+.hero--image .calc-top .calc-label, .hero--image .calc-rate { text-shadow: none; }
+@media (max-width: 960px) {
+  .calc--compact { max-width: 440px; }
 }

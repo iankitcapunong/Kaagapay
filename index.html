@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kaagapay — Cash loans from ₱2,000, costs shown upfront</title>
-  <meta name="description" content="Borrow ₱2,000 to ₱25,000 online and receive it in GCash, Maya or your bank. See the full interest, total and due dates before you apply. No upfront fees.">
+  <title>Kaagapay — Loans from ₱100,000 to ₱2M, costs shown upfront</title>
+  <meta name="description" content="Borrow ₱100,000 to ₱2,000,000 over 6 to 60 months. See the full interest, total and monthly payment before you apply. No upfront fees.">
   <link rel="icon" type="image/png" href="assets/img/logos/logo-64.png">
   <link rel="apple-touch-icon" href="assets/img/logos/logo-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,12 +44,12 @@
     <div class="wrap hero-grid">
       <div class="hero-intro">
         <h1 class="hero-title">Borrow what you need. <em>See every peso</em> first.</h1>
-        <p class="hero-lede">Cash loans from ₱2,000, sent to GCash, Maya or your bank. The interest, the total and every due date are on screen before you apply.</p>
+        <p class="hero-lede">Loans from <span data-cfg="min">₱100,000</span> to <span data-cfg="max">₱2,000,000</span>, sent to your bank or e-wallet. The interest, the total and the monthly payment are on screen before you apply.</p>
         <ul class="hero-facts">
-          <li><span>Interest</span><span><span data-cfg="daily">0.2%</span> per day, nothing else</span></li>
-          <li><span>First loan</span><span><span data-cfg="min">₱2,000</span> – <span data-cfg="maxFirst">₱10,000</span></span></li>
-          <li><span>Returning borrowers</span><span>up to <span data-cfg="maxReturning">₱25,000</span></span></li>
-          <li><span>You'll need</span><span>1 valid ID and a selfie</span></li>
+          <li><span>Loan amount</span><span><span data-cfg="minShort">₱100K</span> – <span data-cfg="maxShort">₱2M</span></span></li>
+          <li><span>Interest</span><span><span data-cfg="monthly">1.5%</span> per month, nothing else</span></li>
+          <li><span>Terms</span><span data-cfg="terms">6–60 months</span></li>
+          <li><span>Upfront fees</span><span>None</span></li>
         </ul>
         <div class="hero-ctas">
           <a class="btn btn-primary" href="apply.html">Apply now</a>
@@ -62,37 +62,33 @@
         <p class="hero-note"><strong>We never charge before release.</strong> If someone asks you to pay a fee to get approved, they are not us.</p>
       </div>
 
-      <div class="calc" id="calc" aria-label="Loan calculator">
-        <div class="calc-tabs" role="tablist">
-          <button class="calc-tab" role="tab" aria-selected="true" data-product="first">First loan<small>up to ₱10,000</small></button>
-          <button class="calc-tab" role="tab" aria-selected="false" data-product="returning">Returning<small>up to ₱25,000</small></button>
-        </div>
+      <div class="calc calc--compact" id="calc" aria-label="Loan calculator">
         <div class="calc-body">
-          <div class="calc-field">
-            <label class="calc-label" for="calc-amount"><span>How much do you need?</span></label>
-            <div class="calc-amount" data-out="amount">₱5,000</div>
-            <input class="range" id="calc-amount" type="range" min="2000" max="10000" step="500" value="5000">
-            <div class="range-ends"><span data-out="min">₱2,000</span><span data-out="max">₱10,000</span></div>
+          <div class="calc-top">
+            <label class="calc-label" for="calc-amount">How much do you need?</label>
+            <span class="calc-rate" data-out="rate">1.5% per month</span>
           </div>
+          <div class="calc-amount" data-out="amount">₱500,000</div>
+          <input class="range" id="calc-amount" type="range" min="100000" max="2000000" step="10000" value="500000">
+          <div class="range-ends"><span data-out="min">₱100K</span><span data-out="max">₱2M</span></div>
 
-          <div class="calc-field">
-            <div class="calc-label"><span>Pay it back over</span></div>
-            <div class="terms" role="group" aria-label="Loan term in months"></div>
-          </div>
+          <div class="calc-label calc-label--terms">Pay it back over</div>
+          <div class="terms" role="group" aria-label="Loan term in months"></div>
 
-          <div class="receipt" aria-live="polite">
-            <dl>
-              <div class="receipt-row"><dt>You receive</dt><span class="leader"></span><dd data-out="receive">₱5,000.00</dd></div>
-              <div class="receipt-row"><dt>Interest</dt><span class="leader"></span><dd data-out="interest">₱900.00</dd></div>
-              <div class="receipt-row"><dt>Fees</dt><span class="leader"></span><dd data-out="fee">₱0.00</dd></div>
-              <div class="receipt-row total"><dt>Total to repay</dt><span class="leader"></span><dd data-out="total">₱5,900.00</dd></div>
-              <div class="receipt-row highlight"><dt>Monthly payment</dt><span class="leader"></span><dd data-out="installment">₱1,966.67 × 3</dd></div>
-              <div class="receipt-row"><dt>First due date</dt><span class="leader"></span><dd data-out="due">—</dd></div>
+          <div class="calc-result" aria-live="polite">
+            <div class="calc-monthly">
+              <span>Monthly payment</span>
+              <strong class="num" data-out="installment">₱26,333.33</strong>
+              <small data-out="months">× 24 months</small>
+            </div>
+            <dl class="calc-sums">
+              <div><dt>Interest</dt><dd class="num" data-out="interest">₱180,000</dd></div>
+              <div><dt>Total to repay</dt><dd class="num" data-out="total">₱680,000</dd></div>
             </dl>
           </div>
 
-          <a class="btn btn-primary btn-block" href="apply.html" data-out="cta">Apply for ₱5,000</a>
-          <p class="calc-fineprint">Rate: <span data-out="rate">0.2% per day</span>, charged on the amount you borrowed (amount × daily rate × days). This is an estimate. Your final amount, term and schedule appear in the Disclosure Statement, which you review before signing.</p>
+          <a class="btn btn-primary btn-block" href="apply.html" data-out="cta">Apply for ₱500,000</a>
+          <p class="calc-fineprint">Estimate only. Interest is charged on the amount borrowed (amount × monthly rate × months). Your final amount, rate and schedule are in the Disclosure Statement you review before signing.</p>
         </div>
       </div>
     </div>
@@ -121,38 +117,38 @@
           <span class="eyebrow">What it costs</span>
           <h2>One rate. No processing, service or "membership" fees.</h2>
         </div>
-        <p>You pay interest on what you borrow, for the days you borrow it. Here is a first loan worked out to the centavo.</p>
+        <p>You pay interest on what you borrow, for the months you borrow it. Here is a ₱500,000 loan worked out to the centavo.</p>
       </div>
 
       <div class="costs" id="example">
         <!-- The money -->
         <div class="costs-main">
-          <p class="costs-label">Borrow <strong data-ex="amount">₱5,000.00</strong> for <strong data-ex="term">3 months (90 days)</strong> and you repay</p>
-          <p class="costs-total num" data-ex="total">₱5,900.00</p>
+          <p class="costs-label">Borrow <strong data-ex="amount">₱500,000</strong> over <strong data-ex="term">24 months</strong> and you repay</p>
+          <p class="costs-total num" data-ex="total">₱680,000.00</p>
 
           <div class="split" aria-hidden="true">
             <span class="split-principal" data-ex-bar="principal"></span>
             <span class="split-interest" data-ex-bar="interest"></span>
           </div>
           <dl class="split-legend">
-            <div><dt><i class="dot dot-principal"></i>Your loan</dt><dd class="num" data-ex="principal">₱5,000.00</dd></div>
-            <div><dt><i class="dot dot-interest"></i>Interest</dt><dd class="num" data-ex="interest">₱900.00</dd></div>
+            <div><dt><i class="dot dot-principal"></i>Your loan</dt><dd class="num" data-ex="principal">₱500,000.00</dd></div>
+            <div><dt><i class="dot dot-interest"></i>Interest</dt><dd class="num" data-ex="interest">₱180,000.00</dd></div>
             <div><dt><i class="dot dot-fee"></i>Fees</dt><dd class="num" data-ex="fee">₱0.00</dd></div>
           </dl>
 
           <p class="formula num">
-            <span data-ex="amount-short">₱5,000</span> × <span data-ex="daily">0.2%</span> × <span data-ex="days">90</span> days
-            = <strong data-ex="interest">₱900.00</strong>
+            <span data-ex="amount">₱500,000</span> × <span data-ex="monthly">1.5%</span> × <span data-ex="months">24</span> months
+            = <strong data-ex="interest">₱180,000.00</strong>
           </p>
 
           <div class="schedule">
             <h3>Your payments</h3>
-            <ol data-ex="schedule">
-              <li><span>Payment 1</span><span class="when">—</span><span class="num">₱1,966.67</span></li>
-              <li><span>Payment 2</span><span class="when">—</span><span class="num">₱1,966.67</span></li>
-              <li><span>Payment 3</span><span class="when">—</span><span class="num">₱1,966.67</span></li>
+            <ol>
+              <li><span><span data-ex="months">24</span> monthly payments of</span><span class="when"></span><span class="num" data-ex="installment">₱28,333.33</span></li>
+              <li><span>First payment due</span><span class="when"></span><span class="num" data-ex="first-due">—</span></li>
+              <li><span>Last payment due</span><span class="when"></span><span class="num" data-ex="last-due">—</span></li>
             </ol>
-            <p>Pay early and interest stops that day. No pre-termination charge. Nominal annual rate: <span data-ex="annual">73%</span>.</p>
+            <p>Pay early and you save the interest on the months you don't use. No pre-termination charge. Nominal annual rate: <span data-ex="annual">18%</span>.</p>
           </div>
         </div>
 
@@ -207,7 +203,7 @@
         <li>
           <span class="step-num">03</span>
           <h3>Verify your ID</h3>
-          <p>Upload a photo of one valid ID and take a selfie so we know it's you.</p>
+          <p>Upload your ID, a selfie and proof of income through the secure link we text you.</p>
           <span class="step-time">2 min</span>
         </li>
         <li>
@@ -236,8 +232,8 @@
           </div>
           <div class="loan-type-body">
             <h3>Personal cash loan</h3>
-            <p>₱2,000 to ₱25,000 for everyday needs, sent to GCash, Maya or your bank.</p>
-            <span class="loan-type-docs">2 documents to prepare</span>
+            <p>₱100,000 to ₱2,000,000 for bigger plans, with no collateral needed.</p>
+            <span class="loan-type-docs">4 documents to prepare</span>
             <span class="loan-type-link">See requirements</span>
           </div>
         </a>
@@ -287,13 +283,13 @@
       <div class="section-head">
         <span class="eyebrow">Who we lend to</span>
         <h2>Whatever your work, you can apply.</h2>
-        <p>Everyone needs just one valid ID and a selfie. The documents below are optional, but they help us approve a higher amount, faster.</p>
+        <p>Everyone needs a valid ID and a selfie, plus proof of income. Here is what we accept for your kind of work.</p>
       </div>
       <div class="audience-grid">
         <article class="audience">
           <h3>Employees</h3>
           <p>Private or government, regular or contractual.</p>
-          <span class="audience-count">Optional: 3 documents</span>
+          <span class="audience-count">Proof of income we accept</span>
           <ul class="mini-check">
             <li>Company ID or Certificate of Employment</li>
             <li>Latest payslip</li>
@@ -304,7 +300,7 @@
         <article class="audience">
           <h3>Business owners</h3>
           <p>Sari-sari stores, food stalls, online sellers, small shops.</p>
-          <span class="audience-count">Optional: 3 documents</span>
+          <span class="audience-count">Proof of income we accept</span>
           <ul class="mini-check">
             <li>DTI registration or Mayor's permit</li>
             <li>Photo of your store or stall</li>
@@ -315,7 +311,7 @@
         <article class="audience">
           <h3>Freelancers</h3>
           <p>VAs, online workers, riders and gig workers.</p>
-          <span class="audience-count">Optional: 3 documents</span>
+          <span class="audience-count">Proof of income we accept</span>
           <ul class="mini-check">
             <li>Contract or client invoices</li>
             <li>Platform earnings screenshot</li>
@@ -326,7 +322,7 @@
         <article class="audience">
           <h3>Pensioners and OFW families</h3>
           <p>Regular pension or remittance from abroad.</p>
-          <span class="audience-count">Optional: 2 documents</span>
+          <span class="audience-count">Proof of income we accept</span>
           <ul class="mini-check">
             <li>SSS or GSIS pension slip</li>
             <li>Recent remittance receipts</li>
@@ -353,8 +349,8 @@
       </div>
       <div class="req-col">
         <span class="eyebrow">What to prepare</span>
-        <h3 style="font-size:1.6rem;margin-bottom:12px">One valid ID and a selfie.</h3>
-        <p>No payslip, no co-maker, no collateral. Any one of these IDs works:</p>
+        <h3 style="font-size:1.6rem;margin-bottom:12px">A valid ID, a selfie and proof of income.</h3>
+        <p>No co-maker needed. Sangla loans also need your OR/CR or land title. Any one of these IDs works:</p>
         <ul class="id-list">
           <li>PhilSys National ID</li>
           <li>UMID</li>

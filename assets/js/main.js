@@ -7,31 +7,33 @@
    ========================================================================== */
 
 const LOAN_CONFIG = {
-  dailyRate: 0.002,          // 0.2% per day nominal interest (6% per month)
-  processingFee: 0,          // flat peso fee deducted from the released amount; 0 = no fee
+  // TODO(owner): PLACEHOLDER RATE. Replace with your actual licensed monthly rate before launch.
+  monthlyRate: 0.015,        // 1.5% per month, add-on (flat) interest on the amount borrowed
+  processingFee: 0,          // flat peso fee; 0 = no fee
   daysPerMonth: 30,
-  step: 500,
-  min: 2000,
-  products: {
-    first:     { max: 10000, terms: [1, 2, 3, 4],          default: { amount: 5000,  term: 3 } },
-    returning: { max: 25000, terms: [1, 2, 3, 4, 6, 9, 12], default: { amount: 12000, term: 6 } },
-  },
-  example: { amount: 5000, term: 3 },   // representative example shown in the Costs section
+  min: 100000,               // ₱100,000
+  max: 2000000,              // ₱2,000,000
+  step: 10000,               // slider moves in ₱10,000 steps
+  terms: [6, 12, 18, 24, 36, 48, 60],   // months
+  default: { amount: 500000, term: 24 },
+  example: { amount: 500000, term: 24 },   // worked example shown in the Costs section
 };
 
 const peso = (n, dp = 2) =>
   "₱" + n.toLocaleString("en-PH", { minimumFractionDigits: dp, maximumFractionDigits: dp });
 
+// Short peso for range labels: ₱100K, ₱2M
+const pesoShort = n => n >= 1e6 ? `₱${+(n / 1e6).toFixed(2)}M` : `₱${+(n / 1e3).toFixed(0)}K`;
+
 function quote(amount, months) {
-  const days = months * LOAN_CONFIG.daysPerMonth;
-  const interest = amount * LOAN_CONFIG.dailyRate * days;
+  const interest = amount * LOAN_CONFIG.monthlyRate * months;
   const fee = LOAN_CONFIG.processingFee;
   const total = amount + interest + fee;
   return {
-    amount, months, days, interest, fee, total,
+    amount, months, days: months * LOAN_CONFIG.daysPerMonth, interest, fee, total,
     installment: total / months,
-    monthlyRate: LOAN_CONFIG.dailyRate * LOAN_CONFIG.daysPerMonth,
-    annualRate: LOAN_CONFIG.dailyRate * 365,
+    monthlyRate: LOAN_CONFIG.monthlyRate,
+    annualRate: LOAN_CONFIG.monthlyRate * 12,
   };
 }
 
@@ -130,18 +132,18 @@ function replay(el, cls) {
   );
 })();
 
-/* ---------- Fill any [data-rate] / [data-cfg] text from config ---------- */
+/* ---------- Fill any [data-cfg] text from config ---------- */
 (function fillConfig() {
+  const C = LOAN_CONFIG;
   const map = {
-    daily: pct(LOAN_CONFIG.dailyRate, 2),
-    monthly: pct(LOAN_CONFIG.dailyRate * LOAN_CONFIG.daysPerMonth),
-    annual: pct(LOAN_CONFIG.dailyRate * 365),
-    fee: LOAN_CONFIG.processingFee ? peso(LOAN_CONFIG.processingFee, 0) : "₱0",
-    min: peso(LOAN_CONFIG.min, 0),
-    maxFirst: peso(LOAN_CONFIG.products.first.max, 0),
-    maxReturning: peso(LOAN_CONFIG.products.returning.max, 0),
-    termsFirst: `${Math.min(...LOAN_CONFIG.products.first.terms)}–${Math.max(...LOAN_CONFIG.products.first.terms)} months`,
-    termsReturning: `${Math.min(...LOAN_CONFIG.products.returning.terms)}–${Math.max(...LOAN_CONFIG.products.returning.terms)} months`,
+    monthly: pct(C.monthlyRate, 2),
+    annual: pct(C.monthlyRate * 12),
+    fee: C.processingFee ? peso(C.processingFee, 0) : "₱0",
+    min: peso(C.min, 0),
+    max: peso(C.max, 0),
+    minShort: pesoShort(C.min),
+    maxShort: pesoShort(C.max),
+    terms: `${Math.min(...C.terms)}–${Math.max(...C.terms)} months`,
   };
   document.querySelectorAll("[data-cfg]").forEach(el => {
     const v = map[el.dataset.cfg];
@@ -149,21 +151,21 @@ function replay(el, cls) {
   });
 })();
 
-/* ---------- Representative example table ---------- */
+/* ---------- Worked example (Costs section) ---------- */
 (function example() {
   const root = document.getElementById("example");
   if (!root) return;
   const q = quote(LOAN_CONFIG.example.amount, LOAN_CONFIG.example.term);
   const set = (k, v) => root.querySelectorAll(`[data-ex="${k}"]`).forEach(el => (el.textContent = v));
-  set("amount", peso(q.amount));
-  set("amount-short", peso(q.amount, 0));
+  set("amount", peso(q.amount, 0));
   set("principal", peso(q.amount));
-  set("term", `${q.months} months (${q.days} days)`);
-  set("days", q.days);
-  set("daily", pct(LOAN_CONFIG.dailyRate, 2));
+  set("term", `${q.months} months`);
+  set("months", q.months);
+  set("monthly", pct(LOAN_CONFIG.monthlyRate, 2));
   set("interest", peso(q.interest));
   set("fee", peso(q.fee));
   set("total", peso(q.total));
+  set("installment", peso(q.installment));
   set("annual", pct(q.annualRate));
 
   // Proportion bar: how much of the total is your loan vs interest
@@ -171,46 +173,38 @@ function replay(el, cls) {
   if (bar("principal")) bar("principal").style.flexGrow = q.amount;
   if (bar("interest")) bar("interest").style.flexGrow = q.interest + q.fee;
 
-  // Payment schedule with real due dates, counted from today
-  const list = root.querySelector('[data-ex="schedule"]');
-  if (list) {
-    const fmt = d => d.toLocaleDateString("en-PH", { month: "short", day: "numeric", year: "numeric" });
-    list.innerHTML = Array.from({ length: q.months }, (_, i) => {
-      const d = new Date();
-      d.setDate(d.getDate() + LOAN_CONFIG.daysPerMonth * (i + 1));
-      return `<li><span>Payment ${i + 1}</span><span class="when">${fmt(d)}</span><span class="num">${peso(q.installment)}</span></li>`;
-    }).join("");
-  }
+  // First and last due dates (a long schedule is summarised, not listed)
+  const fmt = d => d.toLocaleDateString("en-PH", { month: "short", day: "numeric", year: "numeric" });
+  const due = n => { const d = new Date(); d.setMonth(d.getMonth() + n); return fmt(d); };
+  set("first-due", due(1));
+  set("last-due", due(q.months));
 })();
 
 /* ---------- Hero calculator ---------- */
 (function calculator() {
   const root = document.getElementById("calc");
   if (!root) return;
+  const C = LOAN_CONFIG;
 
-  const tabs = root.querySelectorAll(".calc-tab");
   const range = root.querySelector("#calc-amount");
   const amountOut = root.querySelector("[data-out='amount']");
-  const maxOut = root.querySelector("[data-out='max']");
-  const minOut = root.querySelector("[data-out='min']");
   const termsBox = root.querySelector(".terms");
   const cta = root.querySelector("[data-out='cta']");
   const out = k => root.querySelector(`[data-out='${k}']`);
 
-  let product = "first";
-  let amount = LOAN_CONFIG.products.first.default.amount;
-  let term = LOAN_CONFIG.products.first.default.term;
+  let amount = C.default.amount;
+  let term = C.default.term;
 
   function renderTerms() {
-    const p = LOAN_CONFIG.products[product];
     termsBox.innerHTML = "";
-    p.terms.forEach(m => {
+    C.terms.forEach((m, i) => {
       const b = document.createElement("button");
       b.type = "button";
       b.className = "term";
       b.dataset.term = m;
       b.setAttribute("aria-pressed", String(m === term));
       b.innerHTML = `${m} <small>mo</small>`;
+      b.style.setProperty("--i", i);
       b.addEventListener("click", () => {
         if (term === m) return;
         term = m;
@@ -219,51 +213,32 @@ function replay(el, cls) {
       });
       termsBox.appendChild(b);
     });
-    // Stagger the term chips in when the list is rebuilt (product switch)
-    termsBox.querySelectorAll(".term").forEach((b, i) => { b.style.setProperty("--i", i); replay(b, "chip-in"); });
   }
 
   function render(pulse = false) {
-    const p = LOAN_CONFIG.products[product];
-    range.min = LOAN_CONFIG.min;
-    range.max = p.max;
-    range.step = LOAN_CONFIG.step;
+    range.min = C.min;
+    range.max = C.max;
+    range.step = C.step;
     range.value = amount;
-    const fill = ((amount - LOAN_CONFIG.min) / (p.max - LOAN_CONFIG.min)) * 100;
-    range.style.setProperty("--pct", fill + "%");
+    range.style.setProperty("--pct", ((amount - C.min) / (C.max - C.min)) * 100 + "%");
     range.setAttribute("aria-valuetext", peso(amount, 0));
 
     const q = quote(amount, term);
-    tween(amountOut, amount, v => peso(Math.round(v / 10) * 10, 0), 260);
-    minOut.textContent = peso(LOAN_CONFIG.min, 0);
-    maxOut.textContent = peso(p.max, 0);
-    tween(out("receive"), q.amount - q.fee, v => peso(v));
-    tween(out("interest"), q.interest, v => peso(v));
-    tween(out("fee"), q.fee, v => peso(v));
-    tween(out("total"), q.total, v => peso(v));
-    tween(out("installment"), q.installment, v => `${peso(v)} × ${q.months}`);
+    tween(amountOut, amount, v => peso(Math.round(v / 1000) * 1000, 0), 260);
+    out("min").textContent = pesoShort(C.min);
+    out("max").textContent = pesoShort(C.max);
+    tween(out("interest"), q.interest, v => peso(v, 0));
+    tween(out("total"), q.total, v => peso(v, 0));
+    tween(out("installment"), q.installment, v => peso(v));
+    out("months").textContent = `× ${q.months} months`;
     if (pulse) {
       replay(out("total"), "pop");
       replay(out("installment"), "pop");
     }
-    out("due").textContent = firstDueDate();
-    out("rate").textContent = `${pct(LOAN_CONFIG.dailyRate, 2)} per day · ${pct(q.annualRate)} per year`;
+    out("rate").textContent = `${pct(C.monthlyRate, 2)} per month`;
     cta.textContent = `Apply for ${peso(amount, 0)}`;
-    cta.href = `apply.html?product=${product}&amount=${amount}&term=${term}`;
+    cta.href = `apply.html?amount=${amount}&term=${term}`;
   }
-
-  tabs.forEach(t =>
-    t.addEventListener("click", () => {
-      product = t.dataset.product;
-      tabs.forEach(x => x.setAttribute("aria-selected", String(x === t)));
-      const d = LOAN_CONFIG.products[product].default;
-      amount = d.amount;
-      term = d.term;
-      renderTerms();
-      render(true);
-      replay(root.querySelector(".calc-body"), "swap");
-    })
-  );
 
   range.addEventListener("input", () => { amount = Number(range.value); render(); });
 
@@ -306,14 +281,14 @@ function replay(el, cls) {
   const estimate = form.querySelector("[data-estimate]");
   const est = k => form.querySelector(`[data-est='${k}']`);
   const amountErr = form.querySelector("[data-err='amount']");
+  const C = LOAN_CONFIG;
 
-  // Sangla (collateral) loans: amount is appraisal-based, so no term/estimate; ask for collateral details instead
+  // Sangla (collateral) loans also ask for vehicle/property details; amount is subject to appraisal
   const SANGLA = {
-    "car-orcr":    { collateral: "vehicle",  word: "Car",        min: 10000 },
-    "moto-orcr":   { collateral: "vehicle",  word: "Motorcycle", min: 5000 },
-    "real-estate": { collateral: "property", word: "",           min: 50000 },
+    "car-orcr":    { collateral: "vehicle",  word: "Car" },
+    "moto-orcr":   { collateral: "vehicle",  word: "Motorcycle" },
+    "real-estate": { collateral: "property", word: "" },
   };
-  const termField = form.querySelector("[data-term-field]");
   const amountHelp = form.querySelector("[data-help='amount']");
   const collateralSets = [...form.querySelectorAll("[data-collateral]")];
 
@@ -329,35 +304,20 @@ function replay(el, cls) {
     if (w && word) w.textContent = word;
   }
 
-  // Keep amount limits and term choices in sync with the chosen loan type
-  function syncProduct(keepTerm) {
+  // One amount range and one set of terms for every loan type
+  amountIn.min = C.min; amountIn.max = C.max; amountIn.step = 1000;
+  amountIn.placeholder = `e.g. ${C.default.amount.toLocaleString("en-PH")}`;
+  amountErr.textContent = `Enter an amount from ${peso(C.min, 0)} to ${peso(C.max, 0)}.`;
+  termSel.innerHTML = `<option value="">Choose one</option>` +
+    C.terms.map(m => `<option value="${m}">${m} months</option>`).join("");
+
+  function syncProduct() {
     const sangla = SANGLA[productSel.value];
-    if (sangla) {
-      amountIn.min = sangla.min; amountIn.removeAttribute("max"); amountIn.step = 1000;
-      amountIn.placeholder = `e.g. ${(sangla.min * 5).toLocaleString("en-PH")}`;
-      amountErr.textContent = `Enter an amount of at least ${peso(sangla.min, 0)}, in steps of ₱1,000.`;
-      amountHelp.hidden = false;
-      termField.hidden = true; termSel.disabled = true;
-      showCollateral(sangla.collateral, sangla.word);
-      return;
-    }
-    showCollateral(null);
-    amountHelp.hidden = true;
-    termField.hidden = false; termSel.disabled = false;
-    amountIn.placeholder = "e.g. 5000";
-    const p = LOAN_CONFIG.products[productSel.value || "first"];
-    amountIn.min = LOAN_CONFIG.min;
-    amountIn.max = p.max;
-    amountIn.step = LOAN_CONFIG.step;
-    amountErr.textContent = `Enter an amount from ${peso(LOAN_CONFIG.min, 0)} to ${peso(p.max, 0)}, in steps of ${peso(LOAN_CONFIG.step, 0)}.`;
-    const current = Number(keepTerm ?? termSel.value);
-    termSel.innerHTML = `<option value="">Choose one</option>` +
-      p.terms.map(m => `<option value="${m}">${m} month${m > 1 ? "s" : ""}</option>`).join("");
-    if (p.terms.includes(current)) termSel.value = String(current);
+    amountHelp.hidden = !sangla;
+    showCollateral(sangla ? sangla.collateral : null, sangla && sangla.word);
   }
 
   function updateEstimate() {
-    if (SANGLA[productSel.value]) { estimate.hidden = true; return; }
     const amount = Number(amountIn.value), term = Number(termSel.value);
     const ok = term && amountIn.value !== "" && amountIn.checkValidity();
     if (!ok) { estimate.hidden = true; return; }
@@ -370,14 +330,16 @@ function replay(el, cls) {
     if (wasHidden) replay(estimate, "est-in");
   }
 
-  // Prefill from the calculator or a "Who we lend to" link
+  // Prefill from the calculator, a loan page, or a "Who we lend to" link
   const params = new URLSearchParams(location.search);
-  const wanted = params.get("product");
-  if (wanted && (LOAN_CONFIG.products[wanted] || SANGLA[wanted])) productSel.value = wanted;
+  let wanted = params.get("product");
+  if (wanted === "first" || wanted === "returning") wanted = "personal";   // old links
+  if (wanted && productSel.querySelector(`option[value='${CSS.escape(wanted)}']`)) productSel.value = wanted;
   const income = params.get("income");
   if (income && incomeSel.querySelector(`option[value='${CSS.escape(income)}']`)) incomeSel.value = income;
-  syncProduct(params.get("term"));
+  if (C.terms.includes(Number(params.get("term")))) termSel.value = params.get("term");
   if (params.get("amount")) amountIn.value = params.get("amount");
+  syncProduct();
   updateEstimate();
 
   productSel.addEventListener("change", () => { syncProduct(); updateEstimate(); });
